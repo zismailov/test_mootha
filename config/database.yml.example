@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  user: postgres
+
+development:
+  <<: *default
+  database: test_mootha_development
+
+test:
+  <<: *default
+  database: test_mootha_test
+
+production:
+  <<: *default
+  database: test_mootha_production
+  username: test_mootha
+  password: <%= ENV['TEST_MOOTHA_DATABASE_PASSWORD'] %>
