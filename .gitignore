@@ -27,3 +27,8 @@
 /config/master.key
 
 coverage/
+
+# dot env files
+.env
+.env.development
+.env.test
