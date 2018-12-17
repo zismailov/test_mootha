@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Row, Col } from 'react-bootstrap';
 
 class Person extends Component {
   constructor(props){
       super(props)
       this.state = {
-        person: []
+        person: [],
+        loading: true
       }
   }
 
@@ -20,7 +20,8 @@ class Person extends Component {
         axios.spread((personDetails, personActed) => {
           this.setState({
             personDetails: personDetails.data,
-            personActed: personActed.data.cast
+            personActed: personActed.data.cast,
+            loading: false
           });
         })
       )
@@ -29,9 +30,12 @@ class Person extends Component {
 
   render() {
     return (
-        <div className="container">
-          { this.state.personDetails &&
+      <div className="container">
+        { this.state.personDetails &&
           <div className="container_wrap">
+            { this.state.loading ? (
+                <div>Loading...</div>
+            ) : (
               <div className="content">
                 <div className="movie_top">
                   <div className="col-md-9 movie_box">
@@ -47,43 +51,41 @@ class Person extends Component {
                     </div>
                     <div className="clearfix"> </div>
                     <div className="clearfix">Acted</div>
-                    <Row>
-                      <Col>
-                          {this.state.personActed.map((movie, i) => {
-                              var poster = '';
+                      {this.state.personActed.map((movie, i) => {
+                          var poster = '';
 
-                              if (movie.backdrop_path === null) {
-                                poster = '/images/default-poster.jpg';
-                              } else {
-                                poster = 'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path;
-                              }
+                          if (movie.backdrop_path === null) {
+                            poster = '/images/default-poster.jpg';
+                          } else {
+                            poster = 'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path;
+                          }
 
-                              return (
-                                  <div className="flex-item" key={i}>
-                                        <div
-                                          style={{
-                                            background: 'url(' + poster + ') center',
-                                            backgroundSize: 'cover',
-                                            width: '100px',
-                                            height: '100px',
-                                          }}
-                                        />
-                                    {movie.title}
-                                  </div>
-                              );
-                            })}
-                      </Col>
-                    </Row>
+                          return (
+                            <div className="flex-item" key={i}>
+                              <div
+                                style={{
+                                  background: 'url(' + poster + ') center',
+                                  backgroundSize: 'cover',
+                                  width: '100px',
+                                  height: '100px',
+                                }}
+                              />
+                              
+                              {movie.title}
+                            </div>
+                          );
+                        })}
                     <p className="m_4">{this.state.personDetails.biography}</p>
 
                   </div>
                 <div className="clearfix"> </div>
               </div>
             </div>
+            )}
           </div>
-          }
-        </div>
-      )
+        }
+      </div>
+    )
   }
 }
 

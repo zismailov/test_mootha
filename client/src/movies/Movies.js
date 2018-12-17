@@ -11,6 +11,7 @@ class Movies extends Component {
           movies: [],
           response: {},
           keyword: '',
+          loading: true
       }
       this.handleSearch = this.handleSearch.bind(this);
       this.handlePageChange = this.handlePageChange.bind(this);
@@ -26,7 +27,8 @@ class Movies extends Component {
         this.setState({
             movies: response.data.results,
             response: response.data,
-            keyword: keyword
+            keyword: keyword,
+            loading: false
         })
     })
     .catch(error => console.log(error))
@@ -62,7 +64,10 @@ class Movies extends Component {
 
   render() {
     return (
-        <div className="container">
+      <div className="container">
+        { this.state.loading ? (
+          <div>Loading...</div>
+        ) : (
           <div className="container_wrap">
             <div className="content">
               <h2 className="m_3">Search results</h2>
@@ -125,7 +130,9 @@ class Movies extends Component {
               }
             </div>
           </div>
-        </div>
+        )}
+      </div>
+      
     );
   }
 }
