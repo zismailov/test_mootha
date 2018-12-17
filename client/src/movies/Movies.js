@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
-import { render } from 'react-dom';
-import {Router, Route} from 'react-router';
 import Pagination from "react-js-pagination";
 
 
@@ -22,7 +20,6 @@ class Movies extends Component {
     let queryParamsString = this.props.location.search.substring(1)
     let searchParams = new URLSearchParams( queryParamsString );
     let keyword = searchParams.get("keyword") || ''
-    let headers = { 'Authorization': `Bearer ${localStorage.getItem("user_jti")}` }
     
     axios.get('http://localhost:3001/v1/movies?keyword=' +keyword)
     .then(response => {
