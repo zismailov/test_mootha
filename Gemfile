@@ -67,3 +67,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'httparty'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'devise'
+gem 'devise-jwt', '~> 0.5.8'
