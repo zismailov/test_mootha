@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
 import Pagination from "react-js-pagination";
-
+import Header from '../Header';
 
 class Movies extends Component {
   constructor(props){
@@ -69,6 +69,7 @@ class Movies extends Component {
           <div>Loading...</div>
         ) : (
           <div className="container_wrap">
+           <Header/>
             <div className="content">
               <h2 className="m_3">Search results</h2>
               <div className="search">

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Header from '../Header';
 
 class Movie extends Component {
   constructor(props){
@@ -36,6 +37,7 @@ class Movie extends Component {
       <div className="container">
           { this.state.movieDetails &&
             <div className="container_wrap">
+              <Header/>
               { this.state.loading ? (
                 <div>Loading...</div>
               ) : (
